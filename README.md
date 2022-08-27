@@ -105,18 +105,3 @@ $ triflake-cli 1 3 --character=*
 
 ## License
 - [MIT](https://github.com/spirometaxas/triflake-cli/blob/main/LICENSE) &copy; [Spiro Metaxas](https://spirometaxas.com)
-
-
-
-
--b, --blocks   - blocks
--b, --bold     - bold
--i, --inverse  - inverse
---character    - character
-
--d, --diagonal - diagonal
--f, --full     - full rows
-
--o, --outline  - outline
---rotate       - rotate: left, right, full
--c, --closed   - closed (Moore curve)
