@@ -68,16 +68,20 @@ const draw = function(board) {
   return result;
 }
 
-const create = function(n, scale) {
+const create = function(n, config) {
   if (n === undefined || n < 0) {
     return '';
   }
-  if (scale === undefined || scale < n) {
-    scale = n;
+  
+  let scale = n;
+  if (config && config.scale && config.scale > n) {
+    scale = config.scale;
   }
 
+  const character = config !== undefined && config.character !== undefined && config.character.length === 1 ? config.character : undefined;
+
   const triflakeBoard = createBoard(getWidth(scale), getHeight(scale));
-  const antiSnowflake = koch_antisnowflake.create(n, scale);
+  const antiSnowflake = koch_antisnowflake.create(n, { scale: scale, character: character });
   const antiSnowflakeBoard = snowflakeToBoard(antiSnowflake);
 
   insertAntiSnowflake({ x: 0, y: 0 }, antiSnowflakeBoard, triflakeBoard);
