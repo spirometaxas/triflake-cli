@@ -73,20 +73,20 @@ const create = function(n, config) {
     return '';
   }
   
-  let scale = n;
-  if (config && config.scale && config.scale > n) {
-    scale = config.scale;
+  let size = n;
+  if (config && config.size && config.size > n) {
+    size = config.size;
   }
 
   const character = config !== undefined && config.character !== undefined && config.character.length === 1 ? config.character : undefined;
 
-  const triflakeBoard = createBoard(getWidth(scale), getHeight(scale));
-  const antiSnowflake = koch_antisnowflake.create(n, { scale: scale, character: character });
+  const triflakeBoard = createBoard(getWidth(size), getHeight(size));
+  const antiSnowflake = koch_antisnowflake.create(n, { size: size, character: character });
   const antiSnowflakeBoard = snowflakeToBoard(antiSnowflake);
 
   insertAntiSnowflake({ x: 0, y: 0 }, antiSnowflakeBoard, triflakeBoard);
-  insertAntiSnowflake({ x: parseInt(getWidth(scale) / 2) + 1 , y: 0 }, antiSnowflakeBoard, triflakeBoard);
-  insertAntiSnowflake({ x: parseInt(getWidth(scale) / 4) + 1 , y: parseInt(getHeight(scale) / 2) }, antiSnowflakeBoard, triflakeBoard);
+  insertAntiSnowflake({ x: parseInt(getWidth(size) / 2) + 1 , y: 0 }, antiSnowflakeBoard, triflakeBoard);
+  insertAntiSnowflake({ x: parseInt(getWidth(size) / 4) + 1 , y: parseInt(getHeight(size) / 2) }, antiSnowflakeBoard, triflakeBoard);
 
   return draw(triflakeBoard);
 

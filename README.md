@@ -27,7 +27,7 @@ then:
 ```
 const triflake = require('triflake-cli');
 console.log(triflake.create(<n>));
-console.log(triflake.create(<n>, { scale: <scale>, character: <character> }));
+console.log(triflake.create(<n>, { size: <number>, character: <character> }));
 ```
 The config params are optional.
 
