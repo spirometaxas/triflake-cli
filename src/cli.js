@@ -3,13 +3,17 @@ const triflake = require('./index.js');
 
 const printUsage = function(showIntro) {
     if (showIntro) {
-        console.log('\n Print the Triflake Fractal to the console!');
+        console.log(triflake.create(2));
+        console.log(' Print the Triflake Fractal to the console!');
     }
     console.log('\n' + 
                 ' Usage:\n' + 
                 '   $ triflake-cli <n>\n' + 
                 '   $ triflake-cli <n> <size>\n' + 
                 '\n' + 
+                '   <n> is the recursive step, a number greater than or equal to 0\n' + 
+                '   <size> is the size to draw, a number greater than or equal to <n>\n' + 
+                '\n' +
                 ' Options:\n' + 
                 '   --character=<character>  Draw using 1 specific character\n');
 }
