@@ -24,6 +24,10 @@ const getHeight = function(n) {
   return getKochAntiSnowflakeHeight(n) * 2;
 }
 
+const isValidRotation = function(rotation) {
+  return rotation !== undefined && (rotation.toLowerCase() === 'flip' || rotation.toLowerCase() === 'standard');
+}
+
 const createBoard = function(w, h) {
   let board = [];
   for (let i = 0; i < h; i++) {
@@ -78,15 +82,22 @@ const create = function(n, config) {
     size = config.size;
   }
 
+  const rotate = config !== undefined && isValidRotation(config.rotate) ? config.rotate.toLowerCase() : 'standard';
   const character = config !== undefined && config.character !== undefined && config.character.length === 1 ? config.character : undefined;
 
   const triflakeBoard = createBoard(getWidth(size), getHeight(size));
-  const antiSnowflake = koch_antisnowflake.create(n, { size: size, character: character });
+  const antiSnowflake = koch_antisnowflake.create(n, { size: size, rotate: rotate, character: character });
   const antiSnowflakeBoard = snowflakeToBoard(antiSnowflake);
 
-  insertAntiSnowflake({ x: 0, y: 0 }, antiSnowflakeBoard, triflakeBoard);
-  insertAntiSnowflake({ x: parseInt(getWidth(size) / 2) + 1 , y: 0 }, antiSnowflakeBoard, triflakeBoard);
-  insertAntiSnowflake({ x: parseInt(getWidth(size) / 4) + 1 , y: parseInt(getHeight(size) / 2) }, antiSnowflakeBoard, triflakeBoard);
+  if (rotate === 'flip') {
+    insertAntiSnowflake({ x: 0, y: parseInt(getHeight(size) / 2) }, antiSnowflakeBoard, triflakeBoard);
+    insertAntiSnowflake({ x: parseInt(getWidth(size) / 2) + 1 , y: parseInt(getHeight(size) / 2) }, antiSnowflakeBoard, triflakeBoard);
+    insertAntiSnowflake({ x: parseInt(getWidth(size) / 4) + 1 , y: 0 }, antiSnowflakeBoard, triflakeBoard);
+  } else {
+    insertAntiSnowflake({ x: 0, y: 0 }, antiSnowflakeBoard, triflakeBoard);
+    insertAntiSnowflake({ x: parseInt(getWidth(size) / 2) + 1 , y: 0 }, antiSnowflakeBoard, triflakeBoard);
+    insertAntiSnowflake({ x: parseInt(getWidth(size) / 4) + 1 , y: parseInt(getHeight(size) / 2) }, antiSnowflakeBoard, triflakeBoard);
+  }
 
   return draw(triflakeBoard);
 
