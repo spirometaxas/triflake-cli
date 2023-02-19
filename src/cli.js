@@ -9,10 +9,10 @@ const printUsage = function(showIntro) {
     console.log('\n' + 
                 ' Usage:\n' + 
                 '   $ triflake-cli <n>\n' + 
-                '   $ triflake-cli <n> <size>\n' + 
+                '   $ triflake-cli <n> [size] [options]\n' + 
                 '\n' + 
                 '   <n> is the recursive step, a number greater than or equal to 0\n' + 
-                '   <size> is the size to draw, a number greater than or equal to <n>\n' + 
+                '   [size] is the size to draw, a number greater than or equal to <n>\n' + 
                 '\n' +
                 ' Options:\n' + 
                 '   --rotate=<rotate>        Rotate the Triflake: [flip|standard]\n' +
